@@ -14,13 +14,36 @@ class Converter extends React.Component {
     handleSelect = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-        })
+        },
+        this.calculate
+        );
     }
 
     handleInput = (e) => {
         this.setState({
             amount: e.target.value
-        });
+        },
+        this.calculate
+        );
+    }
+
+    calculate = () => {
+        const amount = this.state.amount;
+        if (amount === isNaN) {
+            return
+        } else {
+            fetch(`https://api.exchangeratesapi.io/latest?base=${this.state.base}`)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                const date = res.date;
+                const result = (res.rates[this.state.convertTo] * amount).toFixed(4);
+                this.setState({
+                    result, 
+                    date
+                })
+            })
+        }
     }
 
     render() {
@@ -57,7 +80,7 @@ class Converter extends React.Component {
                                     </form>
                                     <form className="form-inline mb-4">
                                         <input 
-                                            type="number"
+                                            value={result}
                                             disabled={true}
                                             className="form-control form-control-lg mx-3"/>                       
                                         <select 
