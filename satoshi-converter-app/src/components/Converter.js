@@ -13,7 +13,8 @@ class Converter extends React.Component {
 
     handleSelect = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            result: null,
         },
         this.calculate
         );
@@ -21,7 +22,8 @@ class Converter extends React.Component {
 
     handleInput = (e) => {
         this.setState({
-            amount: e.target.value
+            amount: e.target.value,
+            result: null
         },
         this.calculate
         );
@@ -46,6 +48,19 @@ class Converter extends React.Component {
         }
     }
 
+    handleConvert = (e) => {
+        const base = this.state.base;
+        const convertTo = this.state.convertTo;
+        e.preventDefault();
+        this.setState({
+            convertTo: base, 
+            base: convertTo,
+            result: null
+        },
+        this.calculate
+        );
+    }
+
     render() {
         const { currencies, base, amount, convertTo, result, date } = this.state;
         return (
@@ -54,7 +69,7 @@ class Converter extends React.Component {
                     <div className="col-lg-6">
                         <div className="card card-body">
                             <h5>{amount} {base} is equal to</h5>
-                            <h2>{result} {convertTo}</h2>
+                            <h2>{result === null ? "Calculating..." : result} {convertTo}</h2>
                             <p>As of {date}</p>
                             <div className="row">
                                 <div className="col-lg-10 col-md-10">
@@ -80,7 +95,8 @@ class Converter extends React.Component {
                                     </form>
                                     <form className="form-inline mb-4">
                                         <input 
-                                            value={result}
+                                            value={
+                                                result === null ? 'Calculating...' : result}
                                             disabled={true}
                                             className="form-control form-control-lg mx-3"/>                       
                                         <select 
@@ -98,7 +114,7 @@ class Converter extends React.Component {
                                     </form>
                                 </div>
                                 <div className="col-lg-2 col-md-2 col-sm-2 align-self-center">
-                                    <h1 className="convert-btn">&#8595;&#8593;</h1>
+                                    <h1 onClick={this.handleConvert} className="convert-btn">&#8595;&#8593;</h1>
                                 </div>
                             </div>
                         </div>
