@@ -58,6 +58,7 @@ class Converter extends React.Component {
                                     <form className="form-inline mb-4">
                                         <input 
                                             type="number"
+                                            disabled={true}
                                             className="form-control form-control-lg mx-3"/>                       
                                         <select 
                                             name="convertTo"
