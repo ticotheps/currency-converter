@@ -65,7 +65,7 @@ class Converter extends React.Component {
         const { currencies, base, amount, convertTo, result, date } = this.state;
         return (
             <div className="container my-5">
-                <div className="row">
+                <div className="row justify-content-center">
                     <div className="col-lg-6">
                         <div className="card card-body">
                             <h5>{amount} {base} is equal to</h5>
