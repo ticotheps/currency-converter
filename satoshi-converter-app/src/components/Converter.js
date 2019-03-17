@@ -11,6 +11,12 @@ class Converter extends React.Component {
         date: ''
     }
 
+    handleSelect = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
     render() {
         const { currencies, base, amount, convertTo, result, date } = this.state;
         return (
