@@ -1,4 +1,9 @@
 .App {
+  width: 50%;
   text-align: center;
   font-size: 1.8rem;
+}
+
+.convert-btn {
+  cursor: pointer;
 }
